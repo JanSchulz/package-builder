@@ -14,7 +14,7 @@ conda install -c janschulz pypandoc
 You can also permanently add the channel so that you don't need to add `-c janschul` to each `conda install` and `conda update`:
 
 ```
-conda config --add channels http://conda.anaconda.org/janschulz
+conda config --add channels janschulz
 conda install pypandoc
 ```
 

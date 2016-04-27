@@ -26,4 +26,4 @@ install:
 
 
 script:
-  - conda buildall ./recipes --no-inspect-conda-bld-directory   --matrix-conditions  "python >=2.7" --upload-channels "janschulz/channel/dev" --inspect-channels "janschulz/channel/dev"
+  - conda buildall ./recipes --no-inspect-conda-bld-directory   --matrix-conditions  "python >=2.7" --upload-channels "janschulz" --inspect-channels "janschulz"

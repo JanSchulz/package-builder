@@ -1,48 +1,29 @@
-# The language in this case has no bearing - we are going to be making use of conda.
+# This file was generated automatically from conda-smithy. To update this configuration,
+# update the conda-forge.yaml and/or the recipe/meta.yaml.
+
 language: objective-c
 
-sudo: false
-
 env:
-    global:
-        # Add the BINSTAR_TOKEN environment variable. This has been generated with 
-        # 'anaconda auth --create --name JascRecipesTravis --scopes "repos conda api"' 
-        # then "travis encrypt BINSTAR_TOKEN=<token_id>"
-        # PYPI_USER
-        # PYPI_PASS
-        # all via web...
-
-addons:
-    apt:
-        packages:
-            # Install makeinfo [sic] - needed for constructing configuration
-            # files via autoreconf (in particular for udunits)
-            - texinfo
-
-            # Unit testing framework for C (used by libmo_unpack)
-            - check
-
-before_install:
-    - brew update && brew install check
+  global:
+    # The BINSTAR_TOKEN secure variable. This is defined canonically in conda-forge.yml.
+    - secure: "2427TIzd7anYa16QSmhXeLh+olVZAybWdaq1m8sRILsk5ct9v6PZ9AXR3rlm9KNvSe/LS+q8s5kqVwmvzHmBnFYPOZSnJQMf43XQkCandJ0Qce7LS/pv1SlWAbWKydEJyt9/z/QdEtUAmkBLu9bKCTBzeQXtNmzJ7hjVCj3AKTVERlPhmXa/dQgfW76dYiaDEo8ShPrbrzDCH+hGORUYXn23V6VMELjZ9BVQqKLskbzO2OqwldkgJ1OCsunuPtrTFYRmfZoQx/ZYCRK6SK8jJc/6TRzVKCbIUTbomqaWZrM4U2nB6YC8uTcAHDBMITkWdtFVD0NAU6rmVwiqiqfF60B2/8LGAh857RkHoblzPJkNyyYSJ46LNh+/gULj1Y6O4IP2303eFGlck9ttAnFU+IbQ1XUHBxFxm4RjM+y4e1d2/oDxYNNX/WfwUUdTl/d5Lz9v1xXRy/d3fR0ipp19OWB+XOTQUAe7LoyY6YNgmgYBz5FbcAB70mS2b3+rcmLPhd7JFUcuEuIOFkuZTp2iIRBXTUie6pyN8jBCPIBAh+gT+ZcUBfJitmXUcO6t6VmIcTlLPH4VV9OllgQdxXVYLzbw+Adq6VHqtVZR8pbtUkoYsTQYzhirKGwe7gcn+7AluntBFYIxhKI2+uviD1vzqwQYc44EtJgpaKjH/XsK0fk="
 
 install:
-    - wget https://raw.githubusercontent.com/pelson/Obvious-CI/master/bootstrap-obvious-ci-and-miniconda.py
-    - python bootstrap-obvious-ci-and-miniconda.py ~/miniconda x64 2 --without-obvci && source ~/miniconda/bin/activate root
-    - conda config --set show_channel_urls True
-    - conda install -c http://conda.anaconda.org/pelson/channel/development --yes --quiet obvious-ci
+    - |
+      MINICONDA_URL="http://repo.continuum.io/miniconda"
+      MINICONDA_FILE="Miniconda3-3.7.3-MacOSX-x86_64.sh"
+      wget "${MINICONDA_URL}/${MINICONDA_FILE}"
+      bash $MINICONDA_FILE -b
+
+    - export PATH=/Users/travis/miniconda3/bin:$PATH
+    - conda update --yes conda
+    - conda install -n root --quiet -c conda-forge --yes conda-build-all conda-build jinja2 anaconda-client setuptools
+
+      
     - conda config --add channels janschulz
-    - conda config --set show_channel_urls yes
+      
     - conda info
-    - obvci_install_conda_build_tools.py
-    - pip install twine
-    
+
+
 script:
-    #- obvci_conda_build_dir /conda-recipes $UPLOAD_OWNER --build-condition "python >=3.4,<3.5|>=3.5,<3.6|>=2.7,<3"
-    # workaround for https://github.com/pelson/Obvious-CI/issues/52
-    - export CONDA_PY=34
-    - obvci_conda_build_dir ./recipes janschulz --channel main --build-condition "python >=3.4,<3.5"
-    - export CONDA_PY=35
-    - obvci_conda_build_dir ./recipes janschulz --channel main --build-condition "python >=3.5,<3.6"
-    - export CONDA_PY=27
-    - obvci_conda_build_dir ./recipes janschulz --channel main --build-condition "python >=2.7,<3"
-    
+  - conda buildall ./recipes --no-inspect-conda-bld-directory   --matrix-conditions  "python >=2.7" --upload-channels "janschulz/channel/dev" --inspect-channels "janschulz/channel/dev"

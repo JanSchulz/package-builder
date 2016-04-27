@@ -1,0 +1,13 @@
+appveyor:
+  secure: {BINSTAR_TOKEN: pQrnOvQFfuz1l38ZtSzpX9LHQU4y7cmbZo4kTgTnO3aFE5wwixmdmBjMKdqRx9uA}
+channels:
+  sources: [janschulz]
+  targets:
+  - [janschulz, dev]
+is_multi: true
+recipe_dir: recipes
+github:
+  user_or_org: JanSchulz
+  repo_name: multi-package-feedstock
+travis:
+  secure: {BINSTAR_TOKEN: 2427TIzd7anYa16QSmhXeLh+olVZAybWdaq1m8sRILsk5ct9v6PZ9AXR3rlm9KNvSe/LS+q8s5kqVwmvzHmBnFYPOZSnJQMf43XQkCandJ0Qce7LS/pv1SlWAbWKydEJyt9/z/QdEtUAmkBLu9bKCTBzeQXtNmzJ7hjVCj3AKTVERlPhmXa/dQgfW76dYiaDEo8ShPrbrzDCH+hGORUYXn23V6VMELjZ9BVQqKLskbzO2OqwldkgJ1OCsunuPtrTFYRmfZoQx/ZYCRK6SK8jJc/6TRzVKCbIUTbomqaWZrM4U2nB6YC8uTcAHDBMITkWdtFVD0NAU6rmVwiqiqfF60B2/8LGAh857RkHoblzPJkNyyYSJ46LNh+/gULj1Y6O4IP2303eFGlck9ttAnFU+IbQ1XUHBxFxm4RjM+y4e1d2/oDxYNNX/WfwUUdTl/d5Lz9v1xXRy/d3fR0ipp19OWB+XOTQUAe7LoyY6YNgmgYBz5FbcAB70mS2b3+rcmLPhd7JFUcuEuIOFkuZTp2iIRBXTUie6pyN8jBCPIBAh+gT+ZcUBfJitmXUcO6t6VmIcTlLPH4VV9OllgQdxXVYLzbw+Adq6VHqtVZR8pbtUkoYsTQYzhirKGwe7gcn+7AluntBFYIxhKI2+uviD1vzqwQYc44EtJgpaKjH/XsK0fk=}

@@ -1,7 +1,7 @@
 machine:
   services:
-    - docker    
-    
+    - docker
+
 dependencies:
   # Note, we used to use the naive caching of docker images, but found that it was quicker
   # just to pull each time. #rollondockercaching
@@ -11,9 +11,5 @@ dependencies:
 
 test:
   override:
-    # This needs to set a env var in circle CI: 
-    # CircleCI -> Project settings -> env variables -> name: BINSTAR_TOKEN, value: 
-    # 'anaconda auth --create --name JascRecipesCircleCI --scopes "repos conda api"'
-    # Also  PYPI_USER and PYPI_PASS
-    # all via web...
-    - ./scripts/run_docker_build.sh
+    # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
+    - ./ci_support/run_docker_build.sh
